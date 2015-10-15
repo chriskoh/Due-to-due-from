@@ -1,12 +1,3 @@
-/**
- * Module Description
- * 
- * Version    Date            Author           Remarks
- * 1.00       26 Mar 2014     Staff
- *
- */
-
-
 function duetoduefrom(request, response)	// initial function called as default function in script
 {	
 	if(request.getMethod() == 'GET')	// as script is run
@@ -32,14 +23,14 @@ function function2()
 {
 	// import start and end
 	var setStartDate = request.getParameter('date_start');	// Import start
-	var setEndDate = request.getParameter('date_end'); // end
+	var setEndDate 	 = request.getParameter('date_end'); // end
 	
 	// Initial Search for account 1215 (215).
 	var fromfilter	= new Array();
 	fromfilter[0] 	= new nlobjSearchFilter('trandate', null, 'within', setStartDate, setEndDate);
 	fromfilter[1] 	= new nlobjSearchFilter('account', null, 'is', '215');
 	
-	var fromcolumns 	= new Array();
+	var fromcolumns	= new Array();
 	fromcolumns[0] 	= new nlobjSearchColumn('internalid');
 	fromcolumns[1] 	= new nlobjSearchColumn('trandate');
 	fromcolumns[2] 	= new nlobjSearchColumn('type');
@@ -47,7 +38,7 @@ function function2()
 	fromcolumns[4] 	= new nlobjSearchColumn('amount');
 	fromcolumns[5]	= new nlobjSearchColumn('tranid');
 	
-	var fromResults 	= nlapiSearchRecord('transaction', null, fromfilter, fromcolumns);	// due from
+	var fromResults	= nlapiSearchRecord('transaction', null, fromfilter, fromcolumns);	// due from
 	
 	logx('fromResults', fromResults.length);
 	
@@ -211,12 +202,4 @@ function function2()
 	myInlineHtml.setDefaultValue(html);
 	
 	response.writePage(form2);
-}
-
-// Log execution
-function logx(name, value)
-{	
-	var context        = nlapiGetContext();
-	var usageRemaining = context.getRemainingUsage();
-	nlapiLogExecution ('DEBUG', name + ' | ' + usageRemaining, value);
 }
